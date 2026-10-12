@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Workshop pack for the CyberCon 2026 SME cyber insurance session.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>SME Cyber Workshop Pack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single phone-first column that reads like a proposal form — lettered sections, numbered questions, an underwriter's margin note per section. */
+:root{
+  --bg:#f6f6fa; --surface:#ffffff; --ink:#15162b; --muted:#5b5d78; --line:#dcdce8;
+  --accent:#c2187a; --accent-soft:#fbe7f2; --navy:#1d2257; --navy-fg:#ffffff;
+  --flag:#b3261e; --flag-soft:#fdecea; --ok:#1e7a46; --ok-soft:#e5f4ec;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11121f; --surface:#1a1c2e; --ink:#ececf6; --muted:#a3a5c2; --line:#2e3150;
+  --accent:#ff5cb0; --accent-soft:#3a1630; --navy:#262c6e; --navy-fg:#ffffff;
+  --flag:#ff8a80; --flag-soft:#3b1a1a; --ok:#6fd49b; --ok-soft:#173326; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11121f; --surface:#1a1c2e; --ink:#ececf6; --muted:#a3a5c2; --line:#2e3150;
+  --accent:#ff5cb0; --accent-soft:#3a1630; --navy:#262c6e; --navy-fg:#ffffff;
+  --flag:#ff8a80; --flag-soft:#3b1a1a; --ok:#6fd49b; --ok-soft:#173326; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.55 var(--body)}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:0 4rem}
+header.top{background:var(--navy);color:var(--navy-fg)}
+header.top .wrap{padding-block:1.75rem 1.5rem}
+.eyebrow{font:500 .75rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:inherit;opacity:.8}
+h1{font:800 clamp(1.9rem,6vw,2.6rem)/1.05 var(--display);margin:.5rem 0 .6rem;text-wrap:balance;letter-spacing:-.01em}
+h1 span{color:#ff7cc0}
+.session{margin:0 0 1rem;max-width:36rem;opacity:.92}
+.people{display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;font-size:.9rem;opacity:.85}
+.people b{font-weight:600}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:.25rem;padding-block:0;overflow-x:auto}
+nav.tabs a{flex:0 0 auto;padding:.85rem .75rem;font:700 .95rem var(--display);color:var(--muted);text-decoration:none;border-bottom:3px solid transparent}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+section.panel{padding-top:1.5rem}
+h2{font:700 1.5rem/1.2 var(--display);margin:0 0 .5rem;text-wrap:balance}
+h3{font:700 1.15rem/1.25 var(--display);margin:0;text-wrap:balance}
+p{margin:0 0 .9rem}
+.lede{color:var(--muted);max-width:38rem}
+.facts{display:grid;grid-template-columns:7.5rem 1fr;gap:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden;margin:1rem 0 1.5rem}
+.facts dt,.facts dd{margin:0;padding:.7rem .9rem;border-top:1px solid var(--line)}
+.facts dt{font:500 .78rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:.85rem}
+.facts dd{min-width:0}
+.facts dt:first-of-type,.facts dd:first-of-type{border-top:0}
+@media (max-width:30rem){.facts{grid-template-columns:1fr}.facts dd{border-top:0;padding-top:0}.facts dt{padding-bottom:.15rem}}
+.tasks{background:var(--accent-soft);border-radius:10px;padding:1rem 1.1rem}
+.tasks ol{margin:.5rem 0 0;padding-left:1.25rem;display:grid;gap:.3rem}
+.notice{display:flex;gap:.75rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1rem;margin:1rem 0;font-size:.97rem}
+.progress{position:sticky;top:calc(env(safe-area-inset-top,0px) + 3.05rem);z-index:4;background:var(--bg);padding-block:.6rem;display:flex;align-items:center;gap:.75rem;font:500 .8rem var(--mono);color:var(--muted)}
+.bar{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.formsec{margin-top:1.75rem}
+.sechead{display:flex;align-items:baseline;gap:.6rem;padding-bottom:.5rem;border-bottom:2px solid var(--ink);margin-bottom:.25rem}
+.secletter{font:800 1.4rem var(--display);color:var(--accent)}
+.q{padding:1rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:2.4rem 1fr;gap:.25rem .5rem}
+.qn{font:500 .85rem/1.6 var(--mono);color:var(--muted)}
+.qbody{min-width:0}
+.qtext{font-weight:600;margin-bottom:.5rem}
+.opts{display:grid;gap:.35rem}
+.opts.inline{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{display:flex;gap:.55rem;align-items:flex-start;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;font-size:.98rem}
+.opt input{margin-top:.25rem;accent-color:var(--accent);flex:0 0 auto;width:1.05rem;height:1.05rem}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opts.cols{grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+input[type=text],input[type=number],textarea{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem}
+textarea{min-height:4.5rem;resize:vertical}
+.grid-states{display:grid;grid-template-columns:repeat(auto-fit,minmax(5.5rem,1fr));gap:.5rem}
+.grid-states label{font:500 .75rem var(--mono);color:var(--muted);display:grid;gap:.2rem}
+.sub{margin-top:.6rem;font-size:.92rem;color:var(--muted)}
+.sub .qtext{font-weight:400;color:var(--ink);margin-bottom:.35rem}
+details.lens{margin:.75rem 0 0;background:var(--surface);border:1px dashed var(--line);border-radius:8px}
+details.lens summary{cursor:pointer;padding:.65rem .9rem;font:500 .8rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+details.lens div{padding:0 .9rem .8rem;font-size:.95rem;color:var(--muted)}
+.omitted{font-size:.9rem;color:var(--muted);padding:.75rem 0 0}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.5rem}
+button{font:700 .95rem var(--display);padding:.65rem 1rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.danger{color:var(--flag);border-color:var(--flag)}
+.confirm{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.95rem}
+.reveal{margin-top:2rem;border:2px solid var(--navy);border-radius:12px;background:var(--surface);overflow:hidden}
+.reveal>summary{cursor:pointer;list-style:none;padding:1rem 1.1rem;background:var(--navy);color:var(--navy-fg);font:700 1.05rem var(--display)}
+.reveal>summary::-webkit-details-marker{display:none}
+.reveal>summary small{display:block;font:400 .85rem var(--body);opacity:.85;margin-top:.2rem}
+.flags{list-style:none;margin:0;padding:.5rem 1.1rem 1rem;display:grid;gap:.6rem}
+.flags li{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:start;padding-top:.6rem;border-top:1px solid var(--line)}
+.flags li:first-child{border-top:0}
+.chip{font:500 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:.35rem .5rem;border-radius:999px;white-space:nowrap;margin-top:.15rem}
+.chip.flag{background:var(--flag-soft);color:var(--flag)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.ask{background:var(--accent-soft);color:var(--accent)}
+.flags b{font-weight:600}
+.links{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.75rem}
+.links a{display:block;padding:1rem 1.1rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none}
+.links a:hover{border-color:var(--accent)}
+.links .src{font:500 .75rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.links h3{margin:.25rem 0 .3rem}
+.links p{margin:0;color:var(--muted);font-size:.95rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">CyberCon 2026 · Workshop pack</div>
+    <h1>Cyber insurance for <span>SMEs</span></h1>
+    <p class="session">Designing and implementing an effective cyber insurance program for SMEs: practical risk transfer that actually works.</p>
+    <div class="people">
+      <div><b>Tom Hosking</b> · Willis</div>
+      <div><b>Riddhima Dabhowale</b> · Brooklyn Underwriting</div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Workshop pack sections">
+  <div class="wrap">
+    <a href="#business" data-tab="business">The business</a>
+    <a href="#form" data-tab="form">Proposal form</a>
+    <a href="#resources" data-tab="resources">Resources</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section class="panel" id="p-business" data-panel="business">
+  <h2>Meet our SME</h2>
+  <p class="lede">A fictional WA homewares retailer. Work through the proposal form as if you were helping this business apply for cyber cover.</p>
+  <dl class="facts">
+    <dt>Revenue</dt><dd>AUD 18M. About 60% online through a hosted e-commerce platform, plus two Perth stores.</dd>
+    <dt>People &amp; IT</dt><dd>45 staff and a small finance team. IT is outsourced to a local managed service provider (MSP).</dd>
+    <dt>Peak trading</dt><dd>November to December, from Black Friday to Christmas.</dd>
+    <dt>Data</dt><dd>Loyalty program with about 40,000 customers: names, emails, addresses and dates of birth. Card payments go through a third-party gateway, so no card data is stored.</dd>
+    <dt>Payments</dt><dd>About 150 suppliers paid by EFT, including overseas suppliers. Bank detail changes are accepted by email.</dd>
+    <dt>Tech &amp; AI</dt><dd>Microsoft 365. Generative AI writes product copy, and the website has a chatbot.</dd>
+    <dt>Controls today</dt><dd>MFA on email but not on the e-commerce admin. Nightly cloud backups, but a restore has never been tested. Antivirus, no EDR. No incident response plan.</dd>
+  </dl>
+  <div class="tasks">
+    <h3>In your group, work out</h3>
+    <ol>
+      <li>What are the key exposures?</li>
+      <li>What will the underwriter ask, and what's missing?</li>
+      <li>What limit, deductible and key covers make sense?</li>
+      <li>What should they fix before going to market?</li>
+    </ol>
+  </div>
+  <div class="actions"><button type="button" id="go-form">Start the proposal form</button></div>
+</section>
+
+<section class="panel" id="p-form" data-panel="form" hidden>
+  <h2>Short-form cyber proposal</h2>
+  <p class="lede">These are the questions a typical SME cyber proposal form asks. Answer them for our example retailer.</p>
+  <div class="notice"><div>Use the example business only, and don't enter your own company's details. Your answers stay on this phone and aren't sent anywhere.</div></div>
+  <div class="progress" aria-live="polite"><span id="prog-label">0 of 0 answered</span><div class="bar"><i id="prog-bar"></i></div></div>
+  <form id="pf" autocomplete="off"></form>
+
+  <details class="reveal" id="reveal">
+    <summary>What an underwriter would flag for our retailer<small>Open this after the group discussion.</small></summary>
+    <ul class="flags">
+      <li><span class="chip flag">Gap</span><div><b>MFA (E3, E4).</b> MFA covers email but not the e-commerce admin, so the honest answer is "No" with a plan and timeframe. Ticking "Yes" here is a misstatement that can put the claim at risk later.</div></li>
+      <li><span class="chip flag">Gap</span><div><b>Payments (H2, H4).</b> Bank detail changes accepted by email is the classic social engineering setup. Expect social engineering cover to be declined or tightly sub-limited until call-backs on a known number are in place.</div></li>
+      <li><span class="chip flag">Gap</span><div><b>Endpoint (D1).</b> Antivirus only. Many insurers now expect EDR, often run by the MSP.</div></li>
+      <li><span class="chip flag">Gap</span><div><b>Backups (C3, C4).</b> Backups run nightly, but nobody has tested a restore and nobody knows how they're protected. Untested backups are a common reason a ransomware event turns into weeks of downtime.</div></li>
+      <li><span class="chip flag">Gap</span><div><b>Plans (G1, G2).</b> There's no incident response plan. For a business this size the insurer's incident response panel effectively becomes the plan, so the team needs to know the hotline and the first steps.</div></li>
+      <li><span class="chip ask">Ask</span><div><b>Data (C1).</b> About 40,000 people's records. Dates of birth make the data more useful to identity thieves. Does the loyalty program actually need them?</div></li>
+      <li><span class="chip ask">Ask</span><div><b>Dependencies (B1).</b> The hosted e-commerce platform and payment gateway are single points of failure in peak season. Check contingent business interruption and the waiting period.</div></li>
+      <li><span class="chip ask">Ask</span><div><b>AI and content.</b> AI-written product copy and a chatbot raise media liability and chatbot data questions. Few short forms ask about this, but a broker should.</div></li>
+      <li><span class="chip ok">Good</span><div><b>Cards (C5, C6).</b> No card data is stored because a third-party gateway handles payments. Confirm the PCI DSS responsibilities in the gateway contract.</div></li>
+    </ul>
+  </details>
+
+  <div class="actions">
+    <button type="button" class="danger" id="clear">Clear my answers</button>
+    <span class="confirm" id="confirm" hidden>Clear every answer on this phone? <button type="button" class="danger" id="clear-yes">Yes, clear</button><button type="button" id="clear-no">Keep</button></span>
+  </div>
+</section>
+
+<section class="panel" id="p-resources" data-panel="resources" hidden>
+  <h2>Resources</h2>
+  <p class="lede">Public sources behind the session, plus free government guidance for small businesses. We'll share the slides after the session.</p>
+  <ul class="links">
+    <li><a href="https://willistowerswatson.turtl.co/story/cyber-claims-in-focus-june-2026/page/1" target="_blank" rel="noopener"><span class="src">Willis · June 2026</span><h3>Cyber Claims in Focus 2026: Getting value from cyber insurance</h3><p>Analysis of about 5,500 cyber claims, including how much of each loss insurance actually paid.</p></a></li>
+    <li><a href="https://www.cyber.gov.au/about-us/view-all-content/reports-and-statistics/annual-cyber-threat-report-2024-2025" target="_blank" rel="noopener"><span class="src">ASD's ACSC</span><h3>Annual Cyber Threat Report 2024–25</h3><p>Australian cybercrime figures, including the average cost to small businesses.</p></a></li>
+    <li><a href="https://www.cyber.gov.au/resources-business-and-government/essential-cybersecurity/small-business-cybersecurity" target="_blank" rel="noopener"><span class="src">ASD's ACSC</span><h3>Small business cyber security</h3><p>Free guides on MFA, backups, updates and phishing, written for businesses without an IT team.</p></a></li>
+    <li><a href="https://www.oaic.gov.au/privacy/notifiable-data-breaches" target="_blank" rel="noopener"><span class="src">OAIC</span><h3>Notifiable data breaches</h3><p>When a data breach must be reported to affected people and the regulator.</p></a></li>
+    <li><a href="https://www.cyber.gov.au/report-and-recover/report/ransomware-payment-and-cyber-extortion-payment-reporting" target="_blank" rel="noopener"><span class="src">ASD's ACSC</span><h3>Ransomware payment reporting</h3><p>The 72-hour reporting rule for businesses with turnover over $3M that make a ransomware or extortion payment.</p></a></li>
+  </ul>
+  <footer>This pack is general information for a workshop exercise. It isn't legal or insurance advice and doesn't refer to any real business. Policy wordings and proposal forms differ between insurers, so speak to a broker about your own situation.</footer>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var YN=["Yes","No"];
+  var S=[
+   {l:"A",t:"About the business",lens:"Revenue sizes the business interruption exposure, likely ransom demands and the limit. US revenue brings US-style litigation risk. The listed activities are higher-hazard classes that some insurers won't write at all.",q:[
+    {id:"a1",t:"Primary industry sector",k:"text"},
+    {id:"a2",t:"Description of business activities",k:"area"},
+    {id:"a3",t:"Number of employees",k:"num"},
+    {id:"a4",t:"Gross revenue, last 12 months (AUD)",k:"text"},
+    {id:"a5",t:"Revenue from US sales (%)",k:"num"},
+    {id:"a6",t:"Approximate % of revenue by state, territory and overseas",k:"states"},
+    {id:"a7",t:"Which overseas countries do you have business operations in?",k:"text"},
+    {id:"a8",t:"Are you a subsidiary, franchisee or smaller entity of a larger organisation?",k:"radio",o:YN,inline:1,sub:{id:"a8d",t:"If yes, give details, including any network interconnectivity or segmentation",k:"area"}},
+    {id:"a9",t:"Do you operate in, or plan to operate in, any of these areas?",k:"check",cols:1,o:["Accreditation services","Adult content","Credit bureau","Cryptocurrency exchange or distributed ledger technology","Cybersecurity products or services","Data aggregation, brokerage or warehousing","Defence Industry Security Program (DISP)","Financial institution","Gambling","Government or local/regional authority","Manufacturer of life safety products or services","Media production","Payment processing or trading exchanges","Peer-to-peer file sharing","Social media platform","Surveillance (physical or digital)","Technology and IT managed services","Third-party claims administration","None of these"]}
+   ],omit:"The full form also asks for the insured's name, address, ABN, website and email domains, date established, and a contact for IT security. We've left those out."},
+   {l:"B",t:"IT infrastructure and resourcing",lens:"This tells the underwriter how long you'd be down if a key supplier or system failed, which drives business interruption and contingent business interruption cover.",q:[
+    {id:"b1",t:"How readily could you replace your critical components, service providers and supplies?",k:"radio",o:["All are readily available from multiple sources","Substitutes available within 10 days","Longer than 10 days for substitutes","Substitution is not possible","Don't know"]}
+   ]},
+   {l:"C",t:"Data storage and management",lens:"The number and type of records drives notification, credit monitoring and regulatory costs. Encryption and protected backups often decide whether ransomware is an outage or a crisis.",q:[
+    {id:"c1",t:"Approximately how many unique individuals do you hold personal information about, on your own systems or with third parties?",k:"pair",o:["Sensitive data (e.g. medical records, passport details)","Non-sensitive data (e.g. names, addresses, emails)"]},
+    {id:"c2",t:"How is personal and sensitive data encrypted?",k:"radio",o:["At rest, in transit and in backups","In transit and in backups, but not at rest","Not encrypted"]},
+    {id:"c3",t:"How often do you back up critical data?",k:"radio",o:["Daily","Weekly","Monthly","Other"]},
+    {id:"c4",t:"Which of these protect your backup environment?",k:"check",o:["Encryption","Vaulted credentials","Segmentation","MFA","None of these","Other"]},
+    {id:"c5",t:"Do you, or your outsourced provider, accept payment card transactions?",k:"radio",o:YN,inline:1,sub:{id:"c5d",t:"If yes, roughly how many transactions a year?",k:"text"}},
+    {id:"c6",t:"Do you comply with the level of PCI DSS that applies to you?",k:"radio",o:YN,inline:1}
+   ]},
+   {l:"D",t:"Endpoint security",lens:"Endpoint detection and response (EDR) is fast becoming a baseline expectation. Antivirus alone may draw follow-up questions or conditions.",q:[
+    {id:"d1",t:"Which endpoint protection is in place on all laptops, desktops and servers?",k:"check",o:["URL or web filtering","Application isolation and containment","Centralised endpoint protection platform","Advanced anti-malware or antivirus","EDR, XDR or MDR","None of these"],sub:{id:"d1d",t:"Products used for each",k:"text"}}
+   ]},
+   {l:"E",t:"Perimeter security",lens:"MFA on remote access is the control underwriters ask about most. Unpatched, internet-facing systems are the easiest way in, and insurers can see them with external scans.",q:[
+    {id:"e1",t:"Are next-generation firewalls deployed at all network entry and exit points?",k:"radio",o:YN,inline:1},
+    {id:"e2",t:"Can any part of your network (email, corporate or operational technology systems) be accessed remotely?",k:"radio",o:YN,inline:1},
+    {id:"e3",t:"Is multi-factor authentication required for all remote access to your network, including email, corporate and operational technology systems?",k:"radio",o:YN,inline:1},
+    {id:"e4",t:"If MFA doesn't cover all remote access, do you plan to implement it, and by when?",k:"text"},
+    {id:"e5",t:"Do you have a critical security patch management process?",k:"radio",o:YN,inline:1}
+   ]},
+   {l:"F",t:"Email security and training",lens:"Most business email compromise and payment fraud starts with a phishing email.",q:[
+    {id:"f1",t:"Do you use an email filtering tool?",k:"radio",o:YN,inline:1},
+    {id:"f2",t:"How often do employees receive security awareness training?",k:"radio",o:["Annually","Quarterly","Monthly","No training","Don't know"]}
+   ]},
+   {l:"G",t:"Incident response and continuity",lens:"A plan and tested recovery shorten downtime, which is usually the biggest cost in a cyber event.",q:[
+    {id:"g1",t:"Do you have an incident response plan or recovery policy that covers cyber scenarios?",k:"radio",o:["Yes, an incident response plan covering cyber","Yes, another recovery policy covering cyber","No","Don't know"]},
+    {id:"g2",t:"Do you have a disaster recovery or business continuity plan, and has it been tested in the last 18 months?",k:"radio",o:["Yes, current and tested","Yes, current but not tested in 18 months","Yes, but never tested","No"]}
+   ]},
+   {l:"H",t:"Social engineering and payments",lens:"These answers often decide whether social engineering cover is offered at all, and how big its sub-limit is.",q:[
+    {id:"h1",t:"Do you want cover for socially engineered theft?",k:"radio",o:YN,inline:1},
+    {id:"h2",t:"Are all unusual payment instructions verified by calling back the requester?",k:"radio",o:YN,inline:1},
+    {id:"h3",t:"Are outgoing payments split between someone who initiates and someone who authorises, so no one person controls the whole process?",k:"radio",o:YN,inline:1},
+    {id:"h4",t:"Are new payees, and changes to existing payees' bank details, verified directly with the payee?",k:"radio",o:YN,inline:1}
+   ]},
+   {l:"I",t:"Claims and circumstances",lens:"Past incidents and known problems must be disclosed, and known circumstances are usually excluded. An inaccurate answer anywhere on this form can reduce or remove cover when a claim is made.",q:[
+    {id:"i1",t:"In the last 5 years, have you had any incidents or losses this insurance might cover, such as an intrusion, network interruption or extortion threat?",k:"radio",o:YN,inline:1},
+    {id:"i2",t:"Are you aware of any system problem, extortion threat or outage likely to lead to a loss or claim?",k:"radio",o:YN,inline:1},
+    {id:"i3",t:"Have you ever received a privacy claim or complaint, or had to notify individuals or a regulator about a data breach?",k:"radio",o:YN,inline:1}
+   ]}
+  ];
+  var KEY="sme-cyber-workshop-answers", A={};
+  try{A=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){A={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(A))}catch(e){}}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function field(q){
+    var h="";
+    if(q.k==="text")h='<input type="text" id="'+q.id+'" name="'+q.id+'">';
+    else if(q.k==="num")h='<input type="number" inputmode="numeric" id="'+q.id+'" name="'+q.id+'">';
+    else if(q.k==="area")h='<textarea id="'+q.id+'" name="'+q.id+'"></textarea>';
+    else if(q.k==="states"){h='<div class="grid-states">';["NSW","VIC","QLD","SA","WA","ACT","NT","TAS","Overseas"].forEach(function(s){var id=q.id+"_"+s.toLowerCase();h+='<label for="'+id+'">'+s+' %<input type="number" inputmode="numeric" id="'+id+'" name="'+id+'"></label>'});h+="</div>"}
+    else if(q.k==="pair"){h='<div class="opts">';q.o.forEach(function(o,i){var id=q.id+"_"+i;h+='<label for="'+id+'" style="display:grid;gap:.25rem;font-size:.95rem">'+esc(o)+'<input type="number" inputmode="numeric" id="'+id+'" name="'+id+'" placeholder="Number of individuals"></label>'});h+="</div>"}
+    else{var type=q.k==="check"?"checkbox":"radio";h='<div class="opts'+(q.inline?" inline":"")+(q.cols?" cols":"")+'">';q.o.forEach(function(o,i){var id=q.id+"_"+i;h+='<label class="opt" for="'+id+'"><input type="'+type+'" id="'+id+'" name="'+q.id+'" value="'+esc(o)+'"><span>'+esc(o)+'</span></label>'});h+="</div>"}
+    return h;
+  }
+  var html="", total=0;
+  S.forEach(function(s){
+    html+='<div class="formsec"><div class="sechead"><span class="secletter">'+s.l+'</span><h3>'+esc(s.t)+'</h3></div>';
+    s.q.forEach(function(q,i){
+      total++;
+      html+='<div class="q" data-q="'+q.id+'"><div class="qn">'+s.l+(i+1)+'</div><div class="qbody"><div class="qtext">'+esc(q.t)+'</div>'+field(q);
+      if(q.sub)html+='<div class="sub"><div class="qtext">'+esc(q.sub.t)+'</div>'+field(q.sub)+'</div>';
+      html+='</div></div>';
+    });
+    if(s.omit)html+='<p class="omitted">'+esc(s.omit)+'</p>';
+    html+='<details class="lens"><summary>Why underwriters ask</summary><div>'+esc(s.lens)+'</div></details></div>';
+  });
+  var form=document.getElementById("pf"); form.innerHTML=html;
+  form.addEventListener("submit",function(e){e.preventDefault()});
+  // restore
+  Array.prototype.forEach.call(form.elements,function(el){
+    if(!el.name)return;
+    var v=A[el.name];
+    if(v==null)return;
+    if(el.type==="checkbox")el.checked=Array.isArray(v)&&v.indexOf(el.value)>-1;
+    else if(el.type==="radio")el.checked=(v===el.value);
+    else el.value=v;
+  });
+  function collect(){
+    A={};
+    Array.prototype.forEach.call(form.elements,function(el){
+      if(!el.name)return;
+      if(el.type==="checkbox"){if(el.checked)(A[el.name]=A[el.name]||[]).push(el.value)}
+      else if(el.type==="radio"){if(el.checked)A[el.name]=el.value}
+      else if(el.value.trim()!=="")A[el.name]=el.value;
+    });
+  }
+  function progress(){
+    var done=0;
+    form.querySelectorAll(".q").forEach(function(row){
+      var any=Array.prototype.some.call(row.querySelectorAll(".qbody > input, .qbody > textarea, .qbody > .opts input, .qbody > .grid-states input"),function(el){return (el.type==="checkbox"||el.type==="radio")?el.checked:el.value.trim()!==""});
+      if(any)done++;
+    });
+    document.getElementById("prog-label").textContent=done+" of "+total+" answered";
+    document.getElementById("prog-bar").style.width=(total?Math.round(done/total*100):0)+"%";
+  }
+  form.addEventListener("input",function(){collect();save();progress()});
+  form.addEventListener("change",function(){collect();save();progress()});
+  progress();
+  // clear
+  var conf=document.getElementById("confirm"), clr=document.getElementById("clear");
+  clr.addEventListener("click",function(){conf.hidden=false;clr.hidden=true});
+  document.getElementById("clear-no").addEventListener("click",function(){conf.hidden=true;clr.hidden=false});
+  document.getElementById("clear-yes").addEventListener("click",function(){form.reset();A={};save();progress();conf.hidden=true;clr.hidden=false});
+  // tabs
+  var tabs=["business","form","resources"];
+  function show(t){
+    if(tabs.indexOf(t)<0)t="business";
+    document.querySelectorAll("[data-panel]").forEach(function(p){p.hidden=p.getAttribute("data-panel")!==t});
+    document.querySelectorAll("[data-tab]").forEach(function(a){if(a.getAttribute("data-tab")===t)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    try{sessionStorage.setItem("sme-tab",t)}catch(e){}
+  }
+  document.querySelectorAll("[data-tab]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var t=a.getAttribute("data-tab");show(t);try{history.replaceState(null,"","#"+t)}catch(_){}window.scrollTo(0,0)})});
+  document.getElementById("go-form").addEventListener("click",function(){show("form");try{history.replaceState(null,"","#form")}catch(_){}window.scrollTo(0,0)});
+  var start=(location.hash||"").replace("#","");
+  if(tabs.indexOf(start)<0){try{start=sessionStorage.getItem("sme-tab")||"business"}catch(e){start="business"}}
+  show(start);
+})();
+</script>
+
+</body>
+</html>
