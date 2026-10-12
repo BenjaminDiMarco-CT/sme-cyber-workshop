@@ -108,6 +108,41 @@ button.danger{color:var(--flag);border-color:var(--flag)}
 .links p{margin:0;color:var(--muted);font-size:.95rem}
 footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font-size:.85rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+.saveblock{margin-top:2rem;padding:1.1rem;border:2px solid var(--accent);border-radius:12px;background:var(--surface);display:grid;gap:.75rem}
+.saveblock h3{font-size:1.25rem}
+.savehelp{margin:0;color:var(--muted);font-size:.97rem}
+.group-name{display:grid;gap:.3rem}
+.group-name label{font:500 .78rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.incl{max-width:max-content}
+.savebtns{display:flex;flex-wrap:wrap;gap:.5rem}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.savestatus{margin:0;min-height:1.2em;font-size:.92rem;color:var(--ok)}
+.summary{margin-top:1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem}
+.sumhead{border-bottom:2px solid var(--ink);padding-bottom:.6rem;margin-bottom:.5rem}
+.sumhead .eyebrow{opacity:1;color:var(--accent)}
+.sumhead h2{margin:.3rem 0 .2rem}
+.summeta{margin:0;color:var(--muted);font-size:.92rem}
+.sumsec{margin-top:1rem;break-inside:avoid-page}
+.sumsec h4{font:700 1rem var(--display);margin:0 0 .3rem;color:var(--accent)}
+.sumrow{display:grid;grid-template-columns:2.4rem 1fr;gap:.1rem .5rem;padding:.45rem 0;border-top:1px solid var(--line);break-inside:avoid}
+.sumrow .qn{font-size:.8rem}
+.sumq{font-size:.92rem;color:var(--muted)}
+.suma{font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere}
+.suma.none{font-weight:400;font-style:italic;color:var(--muted)}
+.sumflags{margin-top:1.25rem;break-inside:avoid-page}
+.sumflags h4{font:700 1rem var(--display);margin:0 0 .3rem}
+.sumflags .flags{padding:0}
+.sumfoot{margin:1.25rem 0 0;font-size:.8rem;color:var(--muted)}
+@media print{
+  @page{margin:16mm}
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#444;--line:#ccc;--accent:#a3125f;color-scheme:light}
+  body{background:#fff;font-size:11pt}
+  header.top,nav.tabs,.notice,.progress,#pf,.saveblock,.reveal,.actions,footer,[data-panel="business"],[data-panel="resources"],#p-form>h2,#p-form>.lede{display:none!important}
+  [data-panel="form"]{display:block!important;padding:0}
+  .wrap{max-width:none;padding:0}
+  .summary{display:block!important;border:0;padding:0;margin:0}
+  .chip{border:1px solid currentColor}
+}
 </style>
 </head>
 <body>
@@ -166,6 +201,35 @@ footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font-si
   <div class="notice"><div>Use the example business only, and don't enter your own company's details. Your answers stay on this phone and aren't sent anywhere.</div></div>
   <div class="progress" aria-live="polite"><span id="prog-label">0 of 0 answered</span><div class="bar"><i id="prog-bar"></i></div></div>
   <form id="pf" autocomplete="off"></form>
+
+  <section class="saveblock" id="saveblock" aria-labelledby="save-h">
+    <h3 id="save-h">Review and save your answers</h3>
+    <p class="savehelp">See all your answers in one place, then print them, save them as a PDF, or send them to yourself or your group.</p>
+    <div class="group-name">
+      <label for="groupname">Group or table name (optional)</label>
+      <input type="text" id="groupname" placeholder="e.g. Table 4">
+    </div>
+    <label class="opt incl" for="incflags"><input type="checkbox" id="incflags"><span>Include what an underwriter would flag</span></label>
+    <div class="savebtns">
+      <button type="button" class="primary" id="btn-review">Review answers</button>
+      <button type="button" id="btn-print">Print or save as PDF</button>
+      <button type="button" id="btn-download">Download (.txt)</button>
+      <button type="button" id="btn-copy">Copy</button>
+      <button type="button" id="btn-share" hidden>Share</button>
+    </div>
+    <p class="savestatus" id="savestatus" role="status" aria-live="polite"></p>
+  </section>
+
+  <article class="summary" id="summary" hidden aria-labelledby="sum-h">
+    <div class="sumhead">
+      <div class="eyebrow">CyberCon 2026 · SME cyber insurance workshop</div>
+      <h2 id="sum-h">Proposal form answers</h2>
+      <p class="summeta" id="summeta"></p>
+    </div>
+    <div id="sumbody"></div>
+    <div id="sumflags"></div>
+    <p class="sumfoot">Prepared for a workshop exercise about a fictional business. General information only, not legal or insurance advice.</p>
+  </article>
 
   <details class="reveal" id="reveal">
     <summary>What an underwriter would flag for our retailer<small>Open this after the group discussion.</small></summary>
@@ -321,7 +385,117 @@ footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1rem;font-si
   var conf=document.getElementById("confirm"), clr=document.getElementById("clear");
   clr.addEventListener("click",function(){conf.hidden=false;clr.hidden=true});
   document.getElementById("clear-no").addEventListener("click",function(){conf.hidden=true;clr.hidden=false});
-  document.getElementById("clear-yes").addEventListener("click",function(){form.reset();A={};save();progress();conf.hidden=true;clr.hidden=false});
+  document.getElementById("clear-yes").addEventListener("click",function(){form.reset();A={};save();progress();conf.hidden=true;clr.hidden=false;if(!document.getElementById("summary").hidden)renderSummary()});
+  // ---- review, print, download, copy, share ----
+  var STATES=["NSW","VIC","QLD","SA","WA","ACT","NT","TAS","Overseas"];
+  function ans(q){
+    var v;
+    if(q.k==="states"){var parts=[];STATES.forEach(function(s){var x=A[q.id+"_"+s.toLowerCase()];if(x)parts.push(s+" "+x+"%")});v=parts.join(", ")}
+    else if(q.k==="pair"){var ps=[];q.o.forEach(function(o,i){var x=A[q.id+"_"+i];if(x)ps.push(o.replace(/ \(.*\)/,"")+": "+x)});v=ps.join("\n")}
+    else if(Array.isArray(A[q.id]))v=A[q.id].join(", ");
+    else v=A[q.id]||"";
+    return v;
+  }
+  function rows(){
+    var out=[];
+    S.forEach(function(s){
+      var sec={l:s.l,t:s.t,items:[]};
+      s.q.forEach(function(q,i){
+        var a=ans(q), extra="";
+        if(q.sub){var sa=ans(q.sub);if(sa)extra=q.sub.t+": "+sa}
+        sec.items.push({n:s.l+(i+1),t:q.t,a:a,x:extra});
+      });
+      out.push(sec);
+    });
+    return out;
+  }
+  function metaLine(){
+    var g=(document.getElementById("groupname").value||"").trim();
+    var d=new Date().toLocaleDateString("en-AU",{day:"numeric",month:"long",year:"numeric"});
+    return "Example business: WA homewares retailer (fictional)"+(g?" · "+g:"")+" · "+d;
+  }
+  function flagsHTML(){return document.querySelector("#reveal .flags").outerHTML}
+  function flagsText(){
+    return Array.prototype.map.call(document.querySelectorAll("#reveal .flags li"),function(li){
+      return "["+li.querySelector(".chip").textContent.trim()+"] "+li.querySelector("div").textContent.trim();
+    }).join("\n");
+  }
+  function renderSummary(){
+    var h="";
+    rows().forEach(function(sec){
+      h+='<div class="sumsec"><h4>'+sec.l+" · "+esc(sec.t)+"</h4>";
+      sec.items.forEach(function(it){
+        var a=it.a?esc(it.a):"";
+        if(it.x)a+=(a?"\n":"")+esc(it.x);
+        h+='<div class="sumrow"><div class="qn">'+it.n+'</div><div><div class="sumq">'+esc(it.t)+'</div><div class="suma'+(a?"":" none")+'">'+(a||"Not answered")+"</div></div></div>";
+      });
+      h+="</div>";
+    });
+    document.getElementById("sumbody").innerHTML=h;
+    document.getElementById("summeta").textContent=metaLine();
+    document.getElementById("sumflags").innerHTML=document.getElementById("incflags").checked?'<div class="sumflags"><h4>What an underwriter would flag</h4>'+flagsHTML()+"</div>":"";
+  }
+  function asText(){
+    var L=["CyberCon 2026 · SME cyber insurance workshop","Proposal form answers",metaLine(),""];
+    rows().forEach(function(sec){
+      L.push(sec.l+". "+sec.t.toUpperCase());
+      sec.items.forEach(function(it){
+        L.push(it.n+" "+it.t);
+        L.push("   "+(it.a?it.a.replace(/\n/g,"\n   "):"Not answered"));
+        if(it.x)L.push("   "+it.x);
+      });
+      L.push("");
+    });
+    if(document.getElementById("incflags").checked){L.push("WHAT AN UNDERWRITER WOULD FLAG");L.push(flagsText());L.push("")}
+    L.push("Workshop exercise about a fictional business. General information only, not legal or insurance advice.");
+    return L.join("\n");
+  }
+  var statusEl=document.getElementById("savestatus"), statusT;
+  function status(msg){statusEl.textContent=msg;clearTimeout(statusT);statusT=setTimeout(function(){statusEl.textContent=""},4000)}
+  var sumEl=document.getElementById("summary");
+  document.getElementById("btn-review").addEventListener("click",function(){
+    renderSummary();
+    var open=sumEl.hidden; sumEl.hidden=!open;
+    this.textContent=open?"Hide answers":"Review answers";
+    if(open)sumEl.scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  ["incflags","groupname"].forEach(function(id){document.getElementById(id).addEventListener("input",function(){if(!sumEl.hidden)renderSummary()})});
+  form.addEventListener("input",function(){if(!sumEl.hidden)renderSummary()});
+  form.addEventListener("change",function(){if(!sumEl.hidden)renderSummary()});
+  window.addEventListener("beforeprint",renderSummary);
+  document.getElementById("btn-print").addEventListener("click",function(){
+    renderSummary(); show("form");
+    try{window.print()}catch(e){status("Printing isn't available here. Use Download or Copy instead.")}
+  });
+  document.getElementById("btn-download").addEventListener("click",function(){
+    try{
+      var blob=new Blob([asText()],{type:"text/plain;charset=utf-8"});
+      var a=document.createElement("a"), g=(document.getElementById("groupname").value||"").trim().replace(/[^\w-]+/g,"-");
+      a.href=URL.createObjectURL(blob); a.download="cyber-proposal-answers"+(g?"-"+g:"")+".txt";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){URL.revokeObjectURL(a.href)},2000);
+      status("Downloaded.");
+    }catch(e){status("Download didn't work in this browser. Use Copy instead.")}
+  });
+  document.getElementById("btn-copy").addEventListener("click",function(){
+    var t=asText();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){status("Copied. Paste it into an email, note or Teams chat.")},fallback);
+    }else fallback();
+    function fallback(){
+      var ta=document.createElement("textarea");ta.value=t;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand("copy");status("Copied. Paste it into an email, note or Teams chat.")}catch(e){status("Couldn't copy. Use Download instead.")}
+      ta.remove();
+    }
+  });
+  var shareBtn=document.getElementById("btn-share");
+  if(navigator.share){
+    shareBtn.hidden=false;
+    shareBtn.addEventListener("click",function(){
+      navigator.share({title:"Proposal form answers",text:asText()}).catch(function(err){if(err&&err.name!=="AbortError")status("Sharing didn't work. Use Copy instead.")});
+    });
+  }
   // tabs
   var tabs=["business","form","resources"];
   function show(t){
